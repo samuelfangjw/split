@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model expenses {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  groupid     String   @db.Uuid
+  payerid     String   @db.Uuid
+  amount      Float
+  currency    String   @db.VarChar(5)
+  note        String?
+  createdat   DateTime @db.Timestamp(6)
+  description String?  @db.VarChar(255)
+  groups      groups   @relation(fields: [groupid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users       users    @relation(fields: [payerid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  shares      shares[]
+}
+
+model groups {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String     @db.VarChar(255)
+  password         String     @db.VarChar(255)
+  lastusedcurrency String?    @db.VarChar(5)
+  expenses         expenses[]
+  payments         payments[]
+  users            users[]
+}
+
+model payments {
+  id                            String   @id(map: "payment_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  payerid                       String   @db.Uuid
+  payeeid                       String   @db.Uuid
+  groupid                       String   @db.Uuid
+  amount                        Float
+  currency                      String   @db.VarChar(5)
+  createdat                     DateTime @db.Timestamp(6)
+  groups                        groups   @relation(fields: [groupid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payment_groupid_fkey")
+  users_payments_payeeidTousers users    @relation("payments_payeeidTousers", fields: [payeeid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payment_payeeid_fkey")
+  users_payments_payeridTousers users    @relation("payments_payeridTousers", fields: [payerid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payment_payerid_fkey")
+}
+
+model shares {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  expenseid String   @db.Uuid
+  payeeid   String   @db.Uuid
+  amount    Float
+  share     Int
+  expenses  expenses @relation(fields: [expenseid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users     users    @relation(fields: [payeeid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model users {
+  id                               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                             String     @db.VarChar(255)
+  groupid                          String     @db.Uuid
+  expenses                         expenses[]
+  payments_payments_payeeidTousers payments[] @relation("payments_payeeidTousers")
+  payments_payments_payeridTousers payments[] @relation("payments_payeridTousers")
+  shares                           shares[]
+  groups                           groups     @relation(fields: [groupid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
