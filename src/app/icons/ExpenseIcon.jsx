@@ -1,8 +1,8 @@
 export const ExpenseIcon = (props) => (
   <svg
     fill="none"
-    width="800px"
-    height="800px"
+    width="2em"
+    height="2em"
     viewBox="0 0 48 48"
     style={{
       fill: "none",
