@@ -5,6 +5,7 @@ import NavbarWrapper from "./lib/navbar/navbar-wrapper";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,10 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <NavbarWrapper />
         <Providers>
-          <div className="flex justify-center">{children}</div>
+          <div className="flex justify-center">
+            {children}
+            <SpeedInsights />
+          </div>
         </Providers>
         <ToastContainer />
       </body>
