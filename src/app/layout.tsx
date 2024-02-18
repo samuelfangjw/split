@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import NavbarWrapper from "./lib/navbar/navbar-wrapper";
@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   description:
     "split allows you to easily split expenses with your travel budddies",
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
