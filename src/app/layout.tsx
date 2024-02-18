@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   title: "split",
   description:
     "split allows you to easily split expenses with your travel budddies",
-  manifest: "/manifest.json",
 };
 
 export const viewport: Viewport = {

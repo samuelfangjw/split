@@ -19,7 +19,6 @@
     "currency.js": "^2.0.4",
     "framer-motion": "^10.17.9",
     "next": "14.0.4",
-    "next-pwa": "^5.6.0",
     "next-themes": "^0.2.1",
     "paseto-ts": "^1.5.5",
     "react": "^18",
