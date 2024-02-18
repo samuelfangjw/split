@@ -148,6 +148,7 @@ export default function CreateGroupForm() {
             isDisabled={isSubmitting}
             color="primary"
             className="w-full"
+            isLoading={isSubmitting}
           >
             Create Group
           </Button>
