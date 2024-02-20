@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# split
 
-## Getting Started
+split is a web app to keep track of group expenses on short travel trips.
 
-First, run the development server:
+In my time travelling overseas with friends I found it was a real hassle to keep track of group expenses accurately. Commercial solutions exist, but as a broke student who will only use this infrequently paying for such services isn't great value.
+
+spit is built with the following considerations in mind:
+
+- Convenience. It's designed as a web based app relying on shareable group links. No need to download an additional app or sign up for any accounts.
+- Privacy focused. No personal data shared, password protection for peace of mind.
+- Mobile first.
+- Self-hostable on Vercel's free hobby tier plan.
+
+<details>
+  <summary>Screenshots</summary>
+  <img src="docs/images/create.png" alt="create group page"/>
+  <img src="docs/images/overview.png" alt="overview page"/>
+  <img src="docs/images/add-expense.png" alt="add expense page"/>
+  <img src="docs/images/settle-debts.png" alt="settle debts page"/>
+  <img src="docs/images/settings.png" alt="settings page"/>
+</details>
+
+## Setting up locally
+
+1. Start the postgres container.
+
+```bash
+docker-compose up -d
+```
+
+2. Install dependencies.
+
+```bash
+npm ci
+```
+
+3. Create `.env` file in root of project with the following config.
+
+```
+POSTGRES_DATABASE="postgres"
+POSTGRES_HOST="localhost:5432"
+POSTGRES_PASSWORD="postgres"
+POSTGRES_PRISMA_URL="postgres://postgres:postgres@localhost:5432/postgres"
+POSTGRES_URL_NON_POOLING="postgresql://postgres:postgres@localhost:5432/postgres"
+POSTGRES_USER="postgres"
+PASERK_SECRET="k4.local.<key>"
+```
+
+Replace `<key>` with your secret key in base64, e.g. `k4.local.dZMqv8IrpKAfR8Hzg+twrXL8KNO57Pt7cFP5W0UyYyQ=`
+
+4. Synchronise prisma schema with database schema.
+
+```bash
+npx prisma db push
+```
+
+5. Run the development server.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploying on vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Deploy project on Vercel and set up Vercel storage (postgres), ensuring that the region the serverless functions are located in is close to the region the db is hosted.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Add environment variable `PASERK_SECRET`.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Initialize db schema using `prisma db push`.
