@@ -1,6 +1,6 @@
 # split
 
-split is a web app to keep track of group expenses on short travel trips.
+split is a web app to keep track of group expenses on short travel trips with friends.
 
 In my time travelling overseas with friends I found it was a real hassle to keep track of group expenses accurately. Commercial solutions exist, but as a broke student who will only use this infrequently paying for such services isn't great value.
 
