@@ -13,11 +13,11 @@ spit is built with the following considerations in mind:
 
 <details>
   <summary>Screenshots</summary>
-  <img src="docs/images/create.png" alt="create group page"/>
-  <img src="docs/images/overview.png" alt="overview page"/>
-  <img src="docs/images/add-expense.png" alt="add expense page"/>
-  <img src="docs/images/settle-debts.png" alt="settle debts page"/>
-  <img src="docs/images/settings.png" alt="settings page"/>
+  <img src="docs/images/create.png" alt="create group page" width="400px"/>
+  <img src="docs/images/overview.png" alt="overview page" width="400px"/>
+  <img src="docs/images/add-expense.png" alt="add expense page" width="400px"/>
+  <img src="docs/images/settle-debts.png" alt="settle debts page" width="400px"/>
+  <img src="docs/images/settings.png" alt="settings page" width="400px"/>
 </details>
 
 ## Setting up locally
