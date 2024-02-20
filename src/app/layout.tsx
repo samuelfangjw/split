@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,7 @@ export default function RootLayout({
         <NavbarWrapper />
         <Providers>
           <div className="flex justify-center">
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
             <SpeedInsights />
           </div>
         </Providers>
