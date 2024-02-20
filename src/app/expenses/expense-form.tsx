@@ -146,9 +146,8 @@ export default function ExpenseForm({
       );
 
       toastMessage = "Expense edited successfully!";
+      setIsViewMode(true);
     }
-
-    setIsViewMode(true);
 
     successToast(toastMessage, theme === "dark" ? "dark" : "light");
   };
