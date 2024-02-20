@@ -7,8 +7,8 @@ export const ExpenseIcon = (props) => (
     style={{
       fill: "none",
       stroke: "#000000",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
     }}
     {...props}
   >
